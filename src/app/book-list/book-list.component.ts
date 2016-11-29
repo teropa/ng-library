@@ -10,6 +10,7 @@ export class BookListComponent implements OnInit {
   @Input() books: Book[];
   @Output() addBook = new EventEmitter();
   @Output() deleteBook = new EventEmitter();
+  @Output() markAsRead = new EventEmitter();
 
   newBook: Book = {name: '', author: ''};
 

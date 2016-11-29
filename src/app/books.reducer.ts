@@ -7,6 +7,7 @@ export interface AppState {
 
 export const ADD_BOOK = 'ADD_BOOK';
 export const DELETE_BOOK = 'DELETE_BOOK';
+export const MARK_AS_READ = 'MARK_AS_READ';
 
 const initialState: AppState = {
   books: [
@@ -25,6 +26,17 @@ export function booksReducer(state = initialState, action: Action) {
     case DELETE_BOOK:
       const deletedBook = action.payload;
       return Object.assign({}, state, {books: books.filter(b => b !== deletedBook)});
+    case MARK_AS_READ:
+      const book = action.payload;
+      return Object.assign({}, state, {
+        books: books.map(b => {
+          if (b === book) {
+            return Object.assign({}, b, {read: true});
+          } else {
+            return b;
+          }
+        });
+      });
     default: return state;
   }
 }
