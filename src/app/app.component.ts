@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Book } from './book';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  books: Book[] = [
+    { name: 'On The Road', author: 'Jack Kerouac' },
+    { name: 'Ham on Rye', author: 'Charles Bukowski'},
+    { name: 'Naked Lunch', author: 'William S. Burroughs'}
+  ];
+
+  addBook(book: Book) {
+    this.books.push(book);
+  }
+
 }
