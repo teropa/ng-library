@@ -1,4 +1,4 @@
-<app-book-list [books]="books"
+<app-book-list [books]="books$ | async"
                (addBook)="addBook($event)"
                (deleteBook)="deleteBook($event)">
 </app-book-list>

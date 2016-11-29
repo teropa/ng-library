@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { AppState, ADD_BOOK, DELETE_BOOK } from './books.reducer';
 import { Book } from './book';
 
 @Component({
@@ -7,21 +10,17 @@ import { Book } from './book';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  books: Book[] = [
-    { name: 'On The Road', author: 'Jack Kerouac' },
-    { name: 'Ham on Rye', author: 'Charles Bukowski'},
-    { name: 'Naked Lunch', author: 'William S. Burroughs'}
-  ];
+
+  books$ = this.store.select('books');
+
+  constructor(private store: Store<AppState>) { }
 
   addBook(book: Book) {
-    this.books.push(book);
+    this.store.dispatch({type: ADD_BOOK, payload: book});
   }
 
   deleteBook(book: Book) {
-    let idx = this.books.indexOf(book);
-    if (idx >= 0) {
-      this.books.splice(idx, 1);
-    }
+    this.store.dispatch({type: DELETE_BOOK, payload: book});
   }
 
 }
