@@ -1,9 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-interface Book {
-  name: string;
-  author: string;
-}
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Book } from '../book';
 
 @Component({
   selector: 'app-book-list',
@@ -11,11 +7,9 @@ interface Book {
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
-  books: Book[] = [
-    { name: 'On The Road', author: 'Jack Kerouac' },
-    { name: 'Ham on Rye', author: 'Charles Bukowski'},
-    { name: 'Naked Lunch', author: 'William S. Burroughs'}
-  ];
+  @Input() books: Book[];
+  @Output() addBook = new EventEmitter();
+
   newBook: Book = {name: '', author: ''};
 
   constructor() { }
@@ -24,7 +18,8 @@ export class BookListComponent implements OnInit {
   }
 
   addNewBook() {
-    this.books.push(this.newBook);
+    this.addBook.next(this.newBook);
     this.newBook = {name: '', author: ''};
   }
+
 }
