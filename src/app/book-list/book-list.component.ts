@@ -9,6 +9,7 @@ import { Book } from '../book';
 export class BookListComponent implements OnInit {
   @Input() books: Book[];
   @Output() addBook = new EventEmitter();
+  @Output() deleteBook = new EventEmitter();
 
   newBook: Book = {name: '', author: ''};
 

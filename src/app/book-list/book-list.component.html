@@ -1,6 +1,7 @@
 <ul>
   <li *ngFor="let book of books">
     {{ book.author }}: {{ book.name }}
+    <button (click)="deleteBook.next(book)">Delete</button>
   </li>
 </ul>
 <div>
