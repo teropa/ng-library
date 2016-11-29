@@ -17,4 +17,11 @@ export class AppComponent {
     this.books.push(book);
   }
 
+  deleteBook(book: Book) {
+    let idx = this.books.indexOf(book);
+    if (idx >= 0) {
+      this.books.splice(idx, 1);
+    }
+  }
+
 }
