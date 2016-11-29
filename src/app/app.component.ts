@@ -11,7 +11,7 @@ import { Book } from './book';
 })
 export class AppComponent {
 
-  books$ = this.store.select('books');
+  books$ = this.store.select(s => s.get('books'));
 
   constructor(private store: Store<AppState>) { }
 

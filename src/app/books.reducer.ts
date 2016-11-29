@@ -1,42 +1,30 @@
 import { Action } from '@ngrx/store';
+import { fromJS, Map } from 'immutable';
 import { Book } from './book';
 
-export interface AppState {
-  books: Book[]
-}
+export type AppState = Map<string, any>;
 
 export const ADD_BOOK = 'ADD_BOOK';
 export const DELETE_BOOK = 'DELETE_BOOK';
 export const MARK_AS_READ = 'MARK_AS_READ';
 
-const initialState: AppState = {
+const initialState: AppState = fromJS({
   books: [
     { name: 'On The Road', author: 'Jack Kerouac' },
     { name: 'Ham on Rye', author: 'Charles Bukowski'},
     { name: 'Naked Lunch', author: 'William S. Burroughs'}
   ]
-};
+});
 
 export function booksReducer(state = initialState, action: Action) {
-  const books = state.books;
   switch (action.type) {
     case ADD_BOOK:
-      const newBook = action.payload;
-      return Object.assign({}, state, {books: books.concat(newBook)})
+      return state.update('books', b => b.push(Map(action.payload)));
     case DELETE_BOOK:
-      const deletedBook = action.payload;
-      return Object.assign({}, state, {books: books.filter(b => b !== deletedBook)});
+      return state.update('books', b => b.delete(b.indexOf(action.payload)));
     case MARK_AS_READ:
-      const book = action.payload;
-      return Object.assign({}, state, {
-        books: books.map(b => {
-          if (b === book) {
-            return Object.assign({}, b, {read: true});
-          } else {
-            return b;
-          }
-        });
-      });
+      const idx = state.get('books').indexOf(action.payload);
+      return state.setIn(['books', idx, 'read'], true);
     default: return state;
   }
 }
