@@ -3,4 +3,9 @@
     {{ book.author }}: {{ book.name }}
   </li>
 </ul>
-
+<div>
+  <h3>Add book:</h3>
+  <p>Author: <input type="text" [(ngModel)]="newBook.author"></p>
+  <p>Name: <input type="text" [(ngModel)]="newBook.name"></p>
+  <p><button (click)="addNewBook()">Add</button></p>
+</div>

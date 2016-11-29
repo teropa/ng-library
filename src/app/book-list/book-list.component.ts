@@ -16,10 +16,15 @@ export class BookListComponent implements OnInit {
     { name: 'Ham on Rye', author: 'Charles Bukowski'},
     { name: 'Naked Lunch', author: 'William S. Burroughs'}
   ];
+  newBook: Book = {name: '', author: ''};
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  addNewBook() {
+    this.books.push(this.newBook);
+    this.newBook = {name: '', author: ''};
+  }
 }
