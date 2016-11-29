@@ -1,7 +1,11 @@
 <ul>
   <li *ngFor="let book of books">
-    {{ book.author }}: {{ book.name }}
+    <span [class.is-read]="book.read">
+      {{ book.author }}: {{ book.name }}
+    </span>
     <button (click)="deleteBook.next(book)">Delete</button>
+    <button *ngIf="!book.read"
+            (click)="markAsRead.next(book)">Mark as read</button>
   </li>
 </ul>
 <div>
